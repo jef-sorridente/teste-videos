@@ -138,35 +138,35 @@
       const videos = document.querySelectorAll(".item-video");
 
       // Prepara o player para cada vídeo
-      function onYouTubeIframeAPIReady() {
-        videos.forEach((video) => {
-          let containerVideos = video.querySelectorAll(".iframe-video"); // Pega o id do player
+      // function onYouTubeIframeAPIReady() {
+      //   videos.forEach((video) => {
+      //     let containerVideos = video.querySelectorAll(".iframe-video"); // Pega o id do player
 
-          containerVideos.forEach((container) => {
-            player = new YT.Player(container.id, {
-              videoId: container.getAttribute("data-video-id"), // Pega id do vídeo
-              width: 560,
-              height: 316,
-              playerVars: {
-                controls: 1,
-                showinfo: 0,
-                modestbranding: 1,
-                loop: 1,
-                fs: 0,
-                cc_load_policy: 0,
-                iv_load_policy: 3,
-                autohide: 0,
-                rel: 0,
-              },
-              // events: {
-              //   onReady: function (e) {
-              //     e.target.unMute();
-              //   },
-              // },
-            });
-          });
-        });
-      }
+      //     containerVideos.forEach((container) => {
+      //       player = new YT.Player(container.id, {
+      //         videoId: container.getAttribute("data-video-id"), // Pega id do vídeo
+      //         width: 560,
+      //         height: 316,
+      //         playerVars: {
+      //           controls: 1,
+      //           showinfo: 0,
+      //           modestbranding: 1,
+      //           loop: 1,
+      //           fs: 0,
+      //           cc_load_policy: 0,
+      //           iv_load_policy: 3,
+      //           autohide: 0,
+      //           rel: 0,
+      //         },
+      //         // events: {
+      //         //   onReady: function (e) {
+      //         //     e.target.unMute();
+      //         //   },
+      //         // },
+      //       });
+      //     });
+      //   });
+      // }
 
       //evento de clique do vídeo
       // video.addEventListener("click", () => {
