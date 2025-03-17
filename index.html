@@ -21,8 +21,6 @@
     />
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-
-    
     <div class="container container-video-custom swiper swiper-videos">
       <div class="swiper-wrapper">
         <div class="item-video swiper-slide" data-video-id="Q_90WBA5hS4">
@@ -121,6 +119,7 @@
       $(".item-video").on("click", function () {
         let thumb = $(this).find(".figure");
         let videoId = $(this).find(".iframe-video").attr("id"); // ID do vídeo específico
+        let videoShow = $(this).find(".iframe-video");
 
         $(".item-video .figure").removeClass("hide index");
 
@@ -128,6 +127,8 @@
         setTimeout(() => {
           thumb.addClass("index");
         }, 500);
+
+        videoShow.addClass("show");
 
         // Pausar o vídeo atual (se houver)
         Object.values(players).forEach((player) => {
