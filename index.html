@@ -22,7 +22,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-
+    
     <div class="container container-video-custom swiper swiper-videos">
       <div class="swiper-wrapper">
         <div class="item-video swiper-slide" data-video-id="Q_90WBA5hS4">
@@ -118,28 +118,28 @@
     <script>
       let players = {}; // Objeto global para armazenar os players
 
-      // $(".item-video").on("click", function () {
-      //   let thumb = $(this).find(".figure");
-      //   let videoId = $(this).find(".iframe-video").attr("id"); // ID do vídeo específico
+      $(".item-video").on("click", function () {
+        let thumb = $(this).find(".figure");
+        let videoId = $(this).find(".iframe-video").attr("id"); // ID do vídeo específico
 
-      //   $(".item-video .figure").removeClass("hide index");
+        $(".item-video .figure").removeClass("hide index");
 
-      //   thumb.addClass("hide");
-      //   setTimeout(() => {
-      //     thumb.addClass("index");
-      //   }, 500);
+        thumb.addClass("hide");
+        setTimeout(() => {
+          thumb.addClass("index");
+        }, 500);
 
-      //   // Pausar o vídeo atual (se houver)
-      //   Object.values(players).forEach((player) => {
-      //     player.stopVideo(); // Isto vai parar o vídeo
-      //     thumb.removeClass("hide");
-      //   });
+        // Pausar o vídeo atual (se houver)
+        Object.values(players).forEach((player) => {
+          player.stopVideo(); // Isto vai parar o vídeo
+          thumb.removeClass("hide");
+        });
 
-      //   // Reproduzir o vídeo correto com base no data-video-id
-      //   if (players[videoId]) {
-      //     players[videoId].playVideo();
-      //   }
-      // });
+        // Reproduzir o vídeo correto com base no data-video-id
+        if (players[videoId]) {
+          players[videoId].playVideo();
+        }
+      });
 
       function onYouTubeIframeAPIReady() {
         $(".item-video").each(function (index) {
