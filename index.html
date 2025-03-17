@@ -199,6 +199,7 @@
           slideChange: function () {
             // remove as classes
             $(".item-video .figure").removeClass("hide index");
+            $(".item-video .iframe-video").addClass("show");
 
             // Pausa todos os vídeos ativos
             Object.values(players).forEach((player) => {
