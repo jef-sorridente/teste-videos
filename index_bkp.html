@@ -22,10 +22,9 @@
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
-    
     <div class="container container-video-custom swiper swiper-videos">
       <div class="swiper-wrapper">
-        <div class="item-video swiper-slide" data-video-id="Q_90WBA5hS4">
+        <div class="item-video swiper-slide">
           <div class="figure">
             <img
               class="thumb-video-custom"
@@ -43,10 +42,15 @@
               </svg>
             </i>
           </div>
-          <div id="video1" class="iframe-video"></div>
+
+          <div
+            id="video1"
+            class="iframe-video"
+            data-video-id="Q_90WBA5hS4"
+          ></div>
         </div>
 
-        <div class="item-video swiper-slide" data-video-id="aO7zrSDPH78">
+        <div class="item-video swiper-slide">
           <div class="figure">
             <img
               class="thumb-video-custom"
@@ -64,10 +68,14 @@
               </svg>
             </i>
           </div>
-          <div id="video2" class="iframe-video"></div>
+          <div
+            id="video2"
+            class="iframe-video"
+            data-video-id="aO7zrSDPH78"
+          ></div>
         </div>
 
-        <div class="item-video swiper-slide" data-video-id="zOgSI83SuAM">
+        <div class="item-video swiper-slide">
           <div class="figure">
             <img
               class="thumb-video-custom"
@@ -85,10 +93,14 @@
               </svg>
             </i>
           </div>
-          <div id="video3" class="iframe-video"></div>
+          <div
+            id="video3"
+            class="iframe-video"
+            data-video-id="zOgSI83SuAM"
+          ></div>
         </div>
 
-        <div class="item-video swiper-slide" data-video-id="IdVNbGAdupI">
+        <div class="item-video swiper-slide">
           <div class="figure">
             <img
               class="thumb-video-custom"
@@ -106,7 +118,12 @@
               </svg>
             </i>
           </div>
-          <div id="video4" class="iframe-video"></div>
+
+          <div
+            id="video4"
+            class="iframe-video"
+            data-video-id="IdVNbGAdupI"
+          ></div>
         </div>
       </div>
 
@@ -118,64 +135,101 @@
     <script>
       let players = {}; // Objeto global para armazenar os players
 
-      $(".item-video").on("click", function () {
-        let thumb = $(this).find(".figure");
-        let videoId = $(this).find(".iframe-video").attr("id"); // ID do vídeo específico
+      const videos = document.querySelectorAll(".item-video");
 
-        $(".item-video .figure").removeClass("hide index");
-
-        thumb.addClass("hide");
-        setTimeout(() => {
-          thumb.addClass("index");
-        }, 500);
-
-        // Pausar o vídeo atual (se houver)
-        Object.values(players).forEach((player) => {
-          player.stopVideo(); // Isto vai parar o vídeo
-          thumb.removeClass("hide");
-        });
-
-        // Reproduzir o vídeo correto com base no data-video-id
-        if (players[videoId]) {
-          players[videoId].playVideo();
-        }
-      });
-
+      // Prepara o player para cada vídeo
       function onYouTubeIframeAPIReady() {
-        $(".item-video").each(function (index) {
-          let videoId = $(this).attr("data-video-id"); // Pega o ID do vídeo do atributo data-video-id
-          let videoContainer = $(this).find(".iframe-video").attr("id"); // Obtém o ID do container do player
+        videos.forEach((video) => {
+          let containerVideos = video.querySelectorAll(".iframe-video"); // Pega o id do player
 
-          // Criar player para cada vídeo
-          players[videoContainer] = new YT.Player(videoContainer, {
-            videoId: videoId, // Usa o ID correto do vídeo
-            width: 560,
-            height: 316,
-            playerVars: {
-              controls: 1,
-              showinfo: 0,
-              modestbranding: 1,
-              loop: 1,
-              fs: 0,
-              cc_load_policy: 0,
-              iv_load_policy: 3,
-              autohide: 0,
-              rel: 0,
-            },
-            events: {
-              onReady: function (e) {
-                e.target.unMute();
+          containerVideos.forEach((container) => {
+            player = new YT.Player(container.id, {
+              videoId: container.getAttribute("data-video-id"), // Pega id do vídeo
+              width: 560,
+              height: 316,
+              playerVars: {
+                controls: 1,
+                showinfo: 0,
+                modestbranding: 1,
+                loop: 1,
+                fs: 0,
+                cc_load_policy: 0,
+                iv_load_policy: 3,
+                autohide: 0,
+                rel: 0,
               },
-            },
+              // events: {
+              //   onReady: function (e) {
+              //     e.target.unMute();
+              //   },
+              // },
+            });
           });
         });
       }
+
+      //evento de clique do vídeo
+      // video.addEventListener("click", () => {
+      //   console.log(video.id);
+      // });
+
+      // $(".item-video").on("click", function () {
+      //   let videoId = $(this).find(".iframe-video").attr("id"); // ID do vídeo específico
+      //   let thumb = $(this).find(".figure");
+
+      //   $(".item-video .figure").removeClass("hide index");
+
+      //   setTimeout(() => {
+      //     thumb.addClass("hide");
+      //     thumb.addClass("index");
+      //   }, 500);
+
+      //   // Pausar o vídeo atual (se houver)
+      //   Object.values(players).forEach((player) => {
+      //     player.stopVideo(); // Isto vai parar o vídeo
+      //     thumb.removeClass("hide");
+      //   });
+
+      //   // Reproduzir o vídeo correto com base no data-video-id
+      //   if (players[videoId]) {
+      //     players[videoId].playVideo();
+      //   }
+      // });
+
+      // function onYouTubeIframeAPIReady() {
+      //   $(".item-video").each(function () {
+      //     let videoId = $(this).attr("data-video-id"); // Pega o ID do vídeo do atributo data-video-id
+      //     let videoContainer = $(this).find(".iframe-video").attr("id"); // Obtém o ID do container do player
+
+      //     // Criar player para cada vídeo
+      //     players[videoContainer] = new YT.Player(videoContainer, {
+      //       videoId: videoId, // Usa o ID correto do vídeo
+      //       width: 560,
+      //       height: 316,
+      //       playerVars: {
+      //         controls: 1,
+      //         showinfo: 0,
+      //         modestbranding: 1,
+      //         loop: 1,
+      //         fs: 0,
+      //         cc_load_policy: 0,
+      //         iv_load_policy: 3,
+      //         autohide: 0,
+      //         rel: 0,
+      //       },
+      //       events: {
+      //         onReady: function (e) {
+      //           e.target.unMute();
+      //         },
+      //       },
+      //     });
+      //   });
+      // }
 
       // swiper
       var swiper = new Swiper(".swiper-videos", {
         slidesPerView: 1,
         spaceBetween: 16,
-        centeredSlides: true,
         navigation: {
           nextEl: ".swiper-button-next",
           prevEl: ".swiper-button-prev",
@@ -197,12 +251,11 @@
         on: {
           slideChange: function () {
             // remove as classes
-            $(".item-video .figure").removeClass("hide index");
-
+            // $(".item-video .figure").removeClass("hide index");
             // Pausa todos os vídeos ativos
-            Object.values(players).forEach((player) => {
-              player.stopVideo();
-            });
+            // Object.values(players).forEach((player) => {
+            //   player.stopVideo();
+            // });
           },
         },
       });
